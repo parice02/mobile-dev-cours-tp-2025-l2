@@ -1,4 +1,5 @@
 import { genres } from "@/data/genre";
+import { Movie } from "@/types/types";
 import { Image, StyleSheet, Text, View } from "react-native";
 
 const styles = StyleSheet.create({
@@ -83,7 +84,7 @@ const styles = StyleSheet.create({
 
 const image = `https://www.themoviedb.org/t/p/w600_and_h900_bestv2/`;
 
-const Item = ({ item }: { item: any }) => {
+const Item = ({ item }: { item: Movie }) => {
   return (
     <View style={styles.item}>
       <Image
@@ -98,7 +99,7 @@ const Item = ({ item }: { item: any }) => {
           {item.overview}
         </Text>
         <View style={styles.genresContainer}>
-          {item.genre_ids?.map((genreId: number) => {
+          {item.genre_ids.map((genreId: number) => {
             const genre = genres.results.find((g) => g.id === genreId);
             return (
               <View key={genreId} style={styles.genreBadge}>
