@@ -58,12 +58,22 @@ export default function ListItem() {
   const keyExtractor = useCallback((item: any) => `${item.id}`, []);
   const getItemCount = useCallback((data: any) => data.length, []);
 
+  const onPressClear = async () => {
+    setLoading(true);
+    setSearchQuery("");
+    const m = await getMovies(1);
+    setMoviesResults(m.results);
+    setTotalPage(m.total_pages);
+    setLoading(false);
+  };
+
   return (
     <View>
       <CustomTextInput
         searchQuery={searchQuery}
         setSearchQuery={setSearchQuery}
         onPressSearch={onPressSearch}
+        onPressClear={onPressClear}
       />
       <VirtualizedList
         data={moviesResults}

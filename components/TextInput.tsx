@@ -28,10 +28,12 @@ const CustomTextInput = ({
   searchQuery,
   setSearchQuery,
   onPressSearch,
+  onPressClear,
 }: {
   searchQuery: string;
   setSearchQuery: (query: string) => void;
   onPressSearch: () => void;
+  onPressClear: () => void;
 }) => {
   const [borderColor, setBorderColor] = useState("#ccc");
   const onTextInputFocus = () => {
@@ -59,7 +61,7 @@ const CustomTextInput = ({
         clearButtonMode={"always"}
       />
       {searchQuery.length > 0 && Platform.OS === "android" && (
-        <TouchableOpacity onPress={() => setSearchQuery("")} style={styles.clearButton}>
+        <TouchableOpacity onPress={onPressClear} style={styles.clearButton}>
           <Ionicons name={"close"} size={24} color={"#888"} />
         </TouchableOpacity>
       )}
