@@ -38,8 +38,10 @@ const DetailsScreen = () => {
 
   return (
     <ParallaxScrollView
-      headerImage={<Image uri={movie.backdrop_path} title={movie.title} style={styles.reactLogo} />}
-      headerBackgroundColor={{ light: "#fff", dark: "#000" }}>
+      headerImage={<Image uri={movie.backdrop_path} title={movie.title} style={styles.backdrop} />}
+      headerBackgroundColor={{ light: "#fff", dark: "#000" }}
+      title={movie.title}
+      tagline={movie.tagline}>
       <Detail movie={movie} />
     </ParallaxScrollView>
   );
@@ -53,9 +55,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-  reactLogo: {
-    height: "100%",
-    width: "100%",
+  backdrop: {
     ...StyleSheet.absoluteFillObject,
   },
 });

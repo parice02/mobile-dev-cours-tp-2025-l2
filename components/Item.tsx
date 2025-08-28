@@ -87,7 +87,7 @@ const Item = ({ item }: { item: Movie }) => {
     <View style={styles.item}>
       <Image uri={item.poster_path} style={styles.avatar} title={item.title} />
       <View style={styles.content}>
-        <Text style={styles.itemTitle}></Text>
+        <Text style={styles.itemTitle}>{item.title}</Text>
         <Text style={styles.itemOverview} numberOfLines={3} ellipsizeMode={"tail"}>
           {item.overview}
         </Text>
@@ -101,7 +101,7 @@ const Item = ({ item }: { item: Movie }) => {
             );
           })}
         </View>
-        <Text style={styles.itemSubtitle}>
+        <View style={styles.itemSubtitle}>
           <View style={styles.badge}>
             <Text style={styles.badgeText}>
               🗓️
@@ -118,7 +118,7 @@ const Item = ({ item }: { item: Movie }) => {
           <View style={styles.badge}>
             <Text style={[styles.badgeText, styles.badgeRating]}>{item.adult ? "🔞" : "👨‍👩‍👧"}</Text>
           </View>
-        </Text>
+        </View>
       </View>
     </View>
   );

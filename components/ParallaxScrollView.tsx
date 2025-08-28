@@ -1,5 +1,5 @@
 import type { PropsWithChildren, ReactElement } from "react";
-import { StyleSheet, useColorScheme } from "react-native";
+import { Dimensions, StyleSheet, Text, useColorScheme, View } from "react-native";
 import Animated, {
   interpolate,
   useAnimatedRef,
@@ -14,12 +14,18 @@ const HEADER_HEIGHT = 250;
 type Props = PropsWithChildren<{
   headerImage: ReactElement;
   headerBackgroundColor: { dark: string; light: string };
+  title: string;
+  tagline?: string;
 }>;
+
+const { height } = Dimensions.get("window");
 
 export default function ParallaxScrollView({
   children,
   headerImage,
   headerBackgroundColor,
+  title,
+  tagline,
 }: Props) {
   const colorScheme = useColorScheme() ?? "light";
   const scrollRef = useAnimatedRef<Animated.ScrollView>();
@@ -52,6 +58,9 @@ export default function ParallaxScrollView({
             headerAnimatedStyle,
           ]}>
           {headerImage}
+          <View style={styles.overlay} />
+          <Text style={styles.title}>{title}</Text>
+          {tagline ? <Text style={styles.tagline}>{tagline}</Text> : null}
         </Animated.View>
         <ThemedView style={styles.content}>{children}</ThemedView>
       </Animated.ScrollView>
@@ -64,13 +73,33 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   header: {
-    height: 250,
+    height: height * 0.4,
     overflow: "hidden",
+    justifyContent: "flex-end",
+    alignItems: "center",
   },
   content: {
     flex: 1,
     padding: 32,
     gap: 16,
     overflow: "hidden",
+  },
+  overlay: {
+    ...StyleSheet.absoluteFillObject,
+    backgroundColor: "rgba(0,0,0,0.55)", // overlay sombre
+  },
+  title: {
+    fontSize: 26,
+    fontWeight: "700",
+    color: "#fff",
+    textAlign: "center",
+    paddingHorizontal: 20,
+    marginBottom: 8,
+  },
+  tagline: {
+    fontSize: 18,
+    color: "#ccc",
+    marginBottom: 12,
+    textAlign: "center",
   },
 });

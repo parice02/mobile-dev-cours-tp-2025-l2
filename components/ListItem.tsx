@@ -51,14 +51,14 @@ export default function ListItem() {
   const onEndReached = useCallback(async () => {
     setLoading(true);
     if (page < totalPage) {
-      setPage((prev) => prev + 1);
       if (searchQuery) {
         const movies = await searchMovies(searchQuery, page);
-        setMoviesResults((prev) => [...prev, ...movies?.results]);
+        setMoviesResults((prev) => [...prev, ...movies.results]);
       } else {
-        const movies = await getMovies(page);
-        setMoviesResults((prev) => [...prev, ...movies?.results]);
+        const movies = await getMovies(page + 1);
+        setMoviesResults((prev) => [...prev, ...movies.results]);
       }
+      setPage((prev) => prev + 1);
     }
     setLoading(false);
   }, [page, searchQuery, totalPage]);
@@ -75,6 +75,8 @@ export default function ListItem() {
     setTotalPage(m.total_pages);
     setLoading(false);
   };
+
+  const onRefresh = async () => {};
 
   return (
     <View>
@@ -96,6 +98,7 @@ export default function ListItem() {
         ListHeaderComponent={<HeaderComponent />}
         refreshing={loading}
         onEndReached={onEndReached}
+        onRefresh={onRefresh}
       />
     </View>
   );

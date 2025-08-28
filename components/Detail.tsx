@@ -142,7 +142,7 @@ const styles = StyleSheet.create({
   overview: {
     marginHorizontal: 16,
     marginBottom: 16,
-    fontSize: 15,
+    fontSize: 18,
     lineHeight: 22,
     color: "#1f1f1f",
     textAlign: "justify",
