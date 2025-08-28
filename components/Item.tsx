@@ -1,6 +1,8 @@
+import { StyleSheet, Text, View } from "react-native";
+
+import Image from "@/components/ImageURI";
 import { genres } from "@/data/genre";
 import { Movie } from "@/types/types";
-import { Image, StyleSheet, Text, View } from "react-native";
 
 const styles = StyleSheet.create({
   item: {
@@ -80,19 +82,12 @@ const styles = StyleSheet.create({
   },
 });
 
-const image = `https://www.themoviedb.org/t/p/w600_and_h900_bestv2/`;
-
 const Item = ({ item }: { item: Movie }) => {
   return (
     <View style={styles.item}>
-      <Image
-        source={{ uri: image + item.poster_path }}
-        style={styles.avatar}
-        alt={item.title}
-        loadingIndicatorSource={require("@/assets/images/loading.gif")}
-      />
+      <Image uri={item.poster_path} style={styles.avatar} title={item.title} />
       <View style={styles.content}>
-        <Text style={styles.itemTitle}>{item.title}</Text>
+        <Text style={styles.itemTitle}></Text>
         <Text style={styles.itemOverview} numberOfLines={3} ellipsizeMode={"tail"}>
           {item.overview}
         </Text>
@@ -119,6 +114,9 @@ const Item = ({ item }: { item: Movie }) => {
           </View>
           <View style={styles.badge}>
             <Text style={[styles.badgeText, styles.badgeRating]}>⭐ {item.vote_average}/10</Text>
+          </View>
+          <View style={styles.badge}>
+            <Text style={[styles.badgeText, styles.badgeRating]}>{item.adult ? "🔞" : "👨‍👩‍👧"}</Text>
           </View>
         </Text>
       </View>

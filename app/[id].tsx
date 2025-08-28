@@ -1,0 +1,61 @@
+import Detail from "@/components/Detail";
+import Image from "@/components/ImageURI";
+import ParallaxScrollView from "@/components/ParallaxScrollView";
+import { useLocalSearchParams, useNavigation } from "expo-router";
+import { useEffect, useState } from "react";
+import { ActivityIndicator, StyleSheet, View } from "react-native";
+
+import { getMovieDetail } from "../data/tools";
+import { MovieDetail } from "../types/types";
+
+const DetailsScreen = () => {
+  const { id } = useLocalSearchParams<{ id: string }>();
+  const [loading, setLoading] = useState(true);
+  const [movie, setMovie] = useState<MovieDetail | null>(null);
+  const navigation = useNavigation();
+
+  useEffect(() => {
+    (async () => {
+      const m = await getMovieDetail(id);
+      setMovie(m);
+
+      if (navigation.isFocused()) {
+        navigation.setOptions({ title: m.title });
+      }
+      setLoading(false);
+    })();
+  }, [id, navigation]);
+
+  if (loading) {
+    return (
+      <View style={styles.loader}>
+        <ActivityIndicator size="large" color="#E50914" />
+      </View>
+    );
+  }
+
+  if (!movie) return null;
+
+  return (
+    <ParallaxScrollView
+      headerImage={<Image uri={movie.backdrop_path} title={movie.title} style={styles.reactLogo} />}
+      headerBackgroundColor={{ light: "#fff", dark: "#000" }}>
+      <Detail movie={movie} />
+    </ParallaxScrollView>
+  );
+};
+
+export default DetailsScreen;
+
+const styles = StyleSheet.create({
+  loader: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  reactLogo: {
+    height: "100%",
+    width: "100%",
+    ...StyleSheet.absoluteFillObject,
+  },
+});

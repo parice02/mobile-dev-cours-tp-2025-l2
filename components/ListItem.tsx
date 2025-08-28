@@ -1,5 +1,6 @@
+import { Link } from "expo-router";
 import { useCallback, useEffect, useState } from "react";
-import { View, VirtualizedList } from "react-native";
+import { Pressable, View, VirtualizedList } from "react-native";
 
 import EmptyComponent from "@/components/EmptyComponent";
 import FooterComponent from "@/components/FooterComponent";
@@ -7,19 +8,27 @@ import HeaderComponent from "@/components/HeaderComponent";
 import Item from "@/components/Item";
 import ItemSeparator from "@/components/ItemSeparator";
 import CustomTextInput from "@/components/TextInput";
+import { Movie } from "../types/types";
 
 import { getMovies, searchMovies } from "@/data/tools";
-
-import { Movie } from "@/types/types";
 
 export default function ListItem() {
   const [searchQuery, setSearchQuery] = useState("");
   const [loading, setLoading] = useState(true);
   const [page, setPage] = useState(1);
-  const [totalPage, setTotalPage] = useState(1);
+  const [totalPage, setTotalPage] = useState<number>(1);
   const [moviesResults, setMoviesResults] = useState<Movie[]>([]);
 
-  const renderItem = useCallback(({ item }: { item: any }) => <Item item={item} />, []);
+  const renderItem = useCallback(
+    ({ item }: { item: any }) => (
+      <Link href={{ pathname: "./[id]", params: { id: item.id } }} asChild>
+        <Pressable>
+          <Item item={item} />
+        </Pressable>
+      </Link>
+    ),
+    [],
+  );
   const itemSeparator = useCallback(() => <ItemSeparator />, []);
 
   const onPressSearch = useCallback(async () => {
@@ -33,8 +42,8 @@ export default function ListItem() {
   useEffect(() => {
     (async () => {
       const m = await getMovies(1);
-      setMoviesResults(m.results);
-      setTotalPage(m.total_pages);
+      setMoviesResults(m?.results);
+      setTotalPage(m?.total_pages);
       setLoading(false);
     })();
   }, []);
@@ -45,10 +54,10 @@ export default function ListItem() {
       setPage((prev) => prev + 1);
       if (searchQuery) {
         const movies = await searchMovies(searchQuery, page);
-        setMoviesResults((prev) => [...prev, ...movies.results]);
+        setMoviesResults((prev) => [...prev, ...movies?.results]);
       } else {
         const movies = await getMovies(page);
-        setMoviesResults((prev) => [...prev, ...movies.results]);
+        setMoviesResults((prev) => [...prev, ...movies?.results]);
       }
     }
     setLoading(false);
