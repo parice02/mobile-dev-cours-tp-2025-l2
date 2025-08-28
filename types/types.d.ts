@@ -3,10 +3,6 @@ export interface Genre {
   name: string;
 }
 
-export interface Genres {
-  [key: number]: Genre;
-}
-
 export interface Movie {
   id: number;
   title: string;

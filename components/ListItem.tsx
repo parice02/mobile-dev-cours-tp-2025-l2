@@ -3,7 +3,6 @@ import { useCallback, useEffect, useState } from "react";
 import { Pressable, View, VirtualizedList } from "react-native";
 
 import EmptyComponent from "@/components/EmptyComponent";
-import HeaderComponent from "@/components/HeaderComponent";
 import Item from "@/components/Item";
 import ItemSeparator from "@/components/ItemSeparator";
 import CustomTextInput from "@/components/TextInput";
@@ -93,7 +92,6 @@ export default function ListItem() {
         keyExtractor={keyExtractor}
         ItemSeparatorComponent={itemSeparator}
         ListEmptyComponent={<EmptyComponent onRetry={onPressSearch} />}
-        ListHeaderComponent={<HeaderComponent />}
         refreshing={loading}
         onEndReached={onEndReached}
         onRefresh={onRefresh}
