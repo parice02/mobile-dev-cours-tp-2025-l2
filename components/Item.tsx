@@ -43,7 +43,6 @@ const styles = StyleSheet.create({
   itemSubtitle: {
     flexDirection: "row",
     marginTop: 6,
-    flexWrap: "wrap",
   },
   genresContainer: {
     flexDirection: "row",
@@ -110,7 +109,7 @@ const Item = ({ item }: { item: Movie }) => {
         <Text style={styles.itemSubtitle}>
           <View style={styles.badge}>
             <Text style={styles.badgeText}>
-              🗓️{" "}
+              🗓️
               {new Date(item.release_date).toLocaleDateString("fr", {
                 year: "numeric",
                 month: "long",
