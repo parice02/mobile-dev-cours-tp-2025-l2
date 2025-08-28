@@ -44,7 +44,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     marginTop: 6,
     flexWrap: "wrap",
-    justifyContent: "space-between",
   },
   genresContainer: {
     flexDirection: "row",
