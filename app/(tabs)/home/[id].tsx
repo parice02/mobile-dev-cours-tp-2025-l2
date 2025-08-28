@@ -5,8 +5,8 @@ import { useLocalSearchParams, useNavigation } from "expo-router";
 import { useEffect, useState } from "react";
 import { ActivityIndicator, StyleSheet, View } from "react-native";
 
-import { getMovieDetail } from "../data/tools";
-import { MovieDetail } from "../types/types";
+import { getMovieDetail } from "@/data/tools";
+import { MovieDetail } from "@/types/types";
 
 const DetailsScreen = () => {
   const { id } = useLocalSearchParams<{ id: string }>();

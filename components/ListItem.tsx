@@ -19,7 +19,7 @@ export default function ListItem() {
 
   const renderItem = useCallback(
     ({ item }: { item: any }) => (
-      <Link href={{ pathname: "./[id]", params: { id: item.id } }} asChild>
+      <Link href={{ pathname: "/(tabs)/home/[id]", params: { id: item.id } }} asChild>
         <Pressable>
           <Item item={item} />
         </Pressable>
