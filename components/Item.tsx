@@ -95,7 +95,7 @@ const Item = ({ item }: { item: Movie }) => {
       <Image uri={item.poster_path} style={styles.avatar} title={item.title} />
       <View style={styles.content}>
         <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
-          <Text style={styles.itemTitle} >{item.title}</Text>
+          <Text style={styles.itemTitle}>{item.title}</Text>
           {favorites.find((m) => m.id === item.id) ? (
             <Animatable.Text
               animation={"pulse"}
@@ -124,7 +124,7 @@ const Item = ({ item }: { item: Movie }) => {
         <View style={styles.itemSubtitle}>
           <View style={styles.badge}>
             <Text style={styles.badgeText}>
-              🗓️
+              🗓️&ensp;
               {new Date(item.release_date).toLocaleDateString("fr", {
                 year: "numeric",
                 month: "long",
@@ -133,7 +133,9 @@ const Item = ({ item }: { item: Movie }) => {
             </Text>
           </View>
           <View style={styles.badge}>
-            <Text style={[styles.badgeText, styles.badgeRating]}>⭐ {item.vote_average}/10</Text>
+            <Text style={[styles.badgeText, styles.badgeRating]}>
+              ⭐&ensp;{item.vote_average}/10
+            </Text>
           </View>
           <View style={styles.badge}>
             <Text style={[styles.badgeText, styles.badgeRating]}>{item.adult ? "🔞" : "👨‍👩‍👧"}</Text>

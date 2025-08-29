@@ -11,7 +11,7 @@ const DetailsScreen = ({ movie }: { movie: MovieDetail }) => {
         <Image uri={movie.poster_path} style={styles.poster} title={movie.title} />
         <View style={styles.meta}>
           <Text>
-            🗓️
+            🗓️&ensp;
             {new Date(movie.release_date).toLocaleDateString("fr", {
               year: "numeric",
               month: "long",
@@ -19,9 +19,9 @@ const DetailsScreen = ({ movie }: { movie: MovieDetail }) => {
             })}
           </Text>
           <Text>
-            ⭐ {movie.vote_average} ({movie.vote_count} votes)
+            ⭐&ensp;{movie.vote_average} ({movie.vote_count} votes)
           </Text>
-          <Text>⏱️ {movie.runtime} min</Text>
+          <Text>⏱️&ensp;{movie.runtime} min</Text>
           <Text>{movie.adult ? "🔞 Adult" : "👨‍👩‍👧 Tout public"}</Text>
           <Text>Status: {movie.status}</Text>
         </View>
@@ -45,15 +45,15 @@ const DetailsScreen = ({ movie }: { movie: MovieDetail }) => {
       <Text>
         🎬 Titre original : {movie.original_title} ({movie.original_language})
       </Text>
-      <Text>🌍 Pays d’origine : {movie.origin_country.join(", ")}</Text>
-      <Text>💰 Budget : ${movie.budget.toLocaleString()}</Text>
-      <Text>💵 Revenus : ${movie.revenue.toLocaleString()}</Text>
-      <Text>🔥 Popularité : {movie.popularity}</Text>
+      <Text>🌍&ensp;Pays d’origine : {movie.origin_country.join(", ")}</Text>
+      <Text>💰&ensp;Budget : ${movie.budget.toLocaleString()}</Text>
+      <Text>💵&ensp;Revenus : ${movie.revenue.toLocaleString()}</Text>
+      <Text>🔥&ensp;Popularité : {movie.popularity}</Text>
 
       {/* Production */}
       <Text style={styles.sectionTitle}>Production</Text>
       {movie.production_companies.map((c) => (
-        <Text key={c.id}>🏢 {c.name}</Text>
+        <Text key={c.id}>🏢&ensp;{c.name}</Text>
       ))}
       <Text>Pays : {movie.production_countries.map((c) => c.name).join(", ")}</Text>
 
@@ -65,13 +65,13 @@ const DetailsScreen = ({ movie }: { movie: MovieDetail }) => {
       <View style={styles.links}>
         {movie.homepage ? (
           <TouchableOpacity onPress={() => Linking.openURL(movie.homepage)}>
-            <Text style={styles.link}>🌐 Site officiel</Text>
+            <Text style={styles.link}>🌐&ensp;Site officiel</Text>
           </TouchableOpacity>
         ) : null}
         {movie.imdb_id ? (
           <TouchableOpacity
             onPress={() => Linking.openURL(`https://www.imdb.com/title/${movie.imdb_id}`)}>
-            <Text style={styles.link}>🎬 Voir sur IMDB</Text>
+            <Text style={styles.link}>🎬&ensp;Voir sur IMDB</Text>
           </TouchableOpacity>
         ) : null}
       </View>
