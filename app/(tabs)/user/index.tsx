@@ -3,6 +3,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { useNavigation, useRouter } from "expo-router";
 import { useEffect } from "react";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { SystemBars } from "react-native-edge-to-edge";
 
 const styles = StyleSheet.create({
   container: {
@@ -107,6 +108,7 @@ export default function Index() {
         <Ionicons name="heart" size={20} color="#fff" style={{ marginRight: 6 }} />
         <Text style={styles.favoriteText}>Voir mes favoris</Text>
       </TouchableOpacity>
+      <SystemBars style={"auto"} />
     </View>
   );
 }
