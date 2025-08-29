@@ -1,5 +1,6 @@
 import Image from "@/components/ImageURI";
-import { Linking, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { ThemedText } from "@/components/ThemedText";
+import { Linking, StyleSheet, TouchableOpacity, View } from "react-native";
 
 import { MovieDetail } from "../types/types";
 
@@ -10,20 +11,20 @@ const DetailsScreen = ({ movie }: { movie: MovieDetail }) => {
       <View style={styles.posterSection}>
         <Image uri={movie.poster_path} style={styles.poster} title={movie.title} />
         <View style={styles.meta}>
-          <Text>
+          <ThemedText>
             🗓️&ensp;
             {new Date(movie.release_date).toLocaleDateString("fr", {
               year: "numeric",
               month: "long",
               day: "2-digit",
             })}
-          </Text>
-          <Text>
+          </ThemedText>
+          <ThemedText>
             ⭐&ensp;{movie.vote_average} ({movie.vote_count} votes)
-          </Text>
-          <Text>⏱️&ensp;{movie.runtime} min</Text>
-          <Text>{movie.adult ? "🔞 Adult" : "👨‍👩‍👧 Tout public"}</Text>
-          <Text>Status: {movie.status}</Text>
+          </ThemedText>
+          <ThemedText>⏱️&ensp;{movie.runtime} min</ThemedText>
+          <ThemedText>{movie.adult ? "🔞 Adult" : "👨‍👩‍👧 Tout public"}</ThemedText>
+          <ThemedText>Status: {movie.status}</ThemedText>
         </View>
       </View>
 
@@ -31,47 +32,47 @@ const DetailsScreen = ({ movie }: { movie: MovieDetail }) => {
       <View style={styles.genres}>
         {movie.genres.map((g) => (
           <View key={g.id} style={styles.genreBadge}>
-            <Text style={styles.genreText}>{g.name}</Text>
+            <ThemedText style={styles.genreText}>{g.name}</ThemedText>
           </View>
         ))}
       </View>
 
       {/* Overview */}
-      <Text style={styles.sectionTitle}>Synopsis</Text>
-      <Text style={styles.overview}>{movie.overview}</Text>
+      <ThemedText style={styles.sectionTitle}>Synopsis</ThemedText>
+      <ThemedText style={styles.overview}>{movie.overview}</ThemedText>
 
       {/* Infos techniques */}
-      <Text style={styles.sectionTitle}>Détails</Text>
-      <Text>
+      <ThemedText style={styles.sectionTitle}>Détails</ThemedText>
+      <ThemedText>
         🎬 Titre original : {movie.original_title} ({movie.original_language})
-      </Text>
-      <Text>🌍&ensp;Pays d’origine : {movie.origin_country.join(", ")}</Text>
-      <Text>💰&ensp;Budget : ${movie.budget.toLocaleString()}</Text>
-      <Text>💵&ensp;Revenus : ${movie.revenue.toLocaleString()}</Text>
-      <Text>🔥&ensp;Popularité : {movie.popularity}</Text>
+      </ThemedText>
+      <ThemedText>🌍&ensp;Pays d’origine : {movie.origin_country.join(", ")}</ThemedText>
+      <ThemedText>💰&ensp;Budget : ${movie.budget.toLocaleString()}</ThemedText>
+      <ThemedText>💵&ensp;Revenus : ${movie.revenue.toLocaleString()}</ThemedText>
+      <ThemedText>🔥&ensp;Popularité : {movie.popularity}</ThemedText>
 
       {/* Production */}
-      <Text style={styles.sectionTitle}>Production</Text>
+      <ThemedText style={styles.sectionTitle}>Production</ThemedText>
       {movie.production_companies.map((c) => (
-        <Text key={c.id}>🏢&ensp;{c.name}</Text>
+        <ThemedText key={c.id}>🏢&ensp;{c.name}</ThemedText>
       ))}
-      <Text>Pays : {movie.production_countries.map((c) => c.name).join(", ")}</Text>
+      <ThemedText>Pays : {movie.production_countries.map((c) => c.name).join(", ")}</ThemedText>
 
       {/* Langues */}
-      <Text style={styles.sectionTitle}>Langues parlées</Text>
-      <Text>{movie.spoken_languages.map((l) => l.english_name).join(", ")}</Text>
+      <ThemedText style={styles.sectionTitle}>Langues parlées</ThemedText>
+      <ThemedText>{movie.spoken_languages.map((l) => l.english_name).join(", ")}</ThemedText>
 
       {/* Liens externes */}
       <View style={styles.links}>
         {movie.homepage ? (
           <TouchableOpacity onPress={() => Linking.openURL(movie.homepage)}>
-            <Text style={styles.link}>🌐&ensp;Site officiel</Text>
+            <ThemedText style={styles.link}>🌐&ensp;Site officiel</ThemedText>
           </TouchableOpacity>
         ) : null}
         {movie.imdb_id ? (
           <TouchableOpacity
             onPress={() => Linking.openURL(`https://www.imdb.com/title/${movie.imdb_id}`)}>
-            <Text style={styles.link}>🎬&ensp;Voir sur IMDB</Text>
+            <ThemedText style={styles.link}>🎬&ensp;Voir sur IMDB</ThemedText>
           </TouchableOpacity>
         ) : null}
       </View>

@@ -1,7 +1,7 @@
 import { Movie, MovieDetail, Movies } from "@/types/types";
 
 const token = process.env.EXPO_PUBLIC_TOKEN || "";
-const list_url = "https://api.themoviedb.org/3/movie/popular?language=fr-FR";
+const list_url = `https://api.themoviedb.org/3/discover/movie?language=fr-FR&include_adult=true&include_video=true&sort_by=popularity.desc`;
 const detail_url = "https://api.themoviedb.org/3/movie/movie_id?language=en-US";
 const search_url = "https://api.themoviedb.org/3/search/movie?language=fr-FR&include_adult=true";
 
