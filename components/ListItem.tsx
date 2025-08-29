@@ -1,7 +1,7 @@
 import { useActionSheet } from "@expo/react-native-action-sheet";
 import { Ionicons } from "@expo/vector-icons";
 import { Link, useNavigation } from "expo-router";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Pressable, View, VirtualizedList } from "react-native";
 
 import EmptyComponent from "@/components/EmptyComponent";
@@ -149,14 +149,27 @@ export default function ListItem({
 
   const onRefresh = async () => {};
 
+  useEffect(() => {
+    navigation.setOptions({
+      header: () => (
+        <CustomTextInput
+          searchQuery={searchQuery}
+          setSearchQuery={setSearchQuery}
+          onPressSearch={onListPressSearch}
+          onPressClear={onListPressClear}
+        />
+      ),
+    });
+  }, [navigation, searchQuery, onListPressSearch, onListPressClear]);
+
   return (
     <View>
-      <CustomTextInput
+      {/* <CustomTextInput
         searchQuery={searchQuery}
         setSearchQuery={setSearchQuery}
         onPressSearch={onListPressSearch}
         onPressClear={onListPressClear}
-      />
+      /> */}
       <VirtualizedList
         data={moviesResults}
         renderItem={renderItem}
