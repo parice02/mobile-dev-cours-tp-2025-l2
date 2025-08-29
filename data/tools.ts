@@ -1,9 +1,10 @@
-import { Movie, MovieDetail, Movies } from "@/types/types";
+import { Movie, MovieDetail, Movies, User } from "@/types/types";
 
 const token = process.env.EXPO_PUBLIC_TOKEN || "";
 const list_url = `https://api.themoviedb.org/3/discover/movie?language=fr-FR&include_adult=true&include_video=true&sort_by=popularity.desc`;
 const detail_url = "https://api.themoviedb.org/3/movie/movie_id?language=en-US";
 const search_url = "https://api.themoviedb.org/3/search/movie?language=fr-FR&include_adult=true";
+const account_url = "https://api.themoviedb.org/3/account/0";
 
 export const favoriteMovies: Movie[] = [];
 
@@ -73,4 +74,29 @@ const searchMovies = async (query: string, page: number): Promise<Movies> => {
   }
 };
 
-export { getMovieDetail, getMovies, searchMovies };
+const getUser = async (): Promise<User> => {
+  try {
+    const response = await fetch(account_url, config);
+    return await response.json();
+  } catch (e) {
+    console.error(e);
+    return {
+      id: 0,
+      username: "",
+      avatar: {
+        tmdb: {
+          avatar_path: "",
+        },
+        gravatar: {
+          hash: "",
+        },
+      },
+      name: "",
+      iso_639_1: "",
+      iso_3166_1: "",
+      include_adult: false,
+    };
+  }
+};
+
+export { getMovieDetail, getMovies, getUser, searchMovies };

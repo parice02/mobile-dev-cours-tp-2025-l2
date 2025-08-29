@@ -62,3 +62,20 @@ export interface Movies {
   total_pages: number;
   total_results: number;
 }
+
+export interface User {
+  id: number;
+  username: string;
+  avatar: {
+    tmdb: {
+      avatar_path: string;
+    };
+    gravatar: {
+      hash: string;
+    };
+  };
+  name: string;
+  iso_639_1: string;
+  iso_3166_1: string;
+  include_adult: boolean;
+}

@@ -51,6 +51,7 @@ export default function ListItem({
 
   const onLongPress = useCallback(
     (item: Movie) => {
+      console.log(navigation.getId());
       if (navigation.getId() === "/(tabs)/home") {
         const options = ["Ajouter aux favoris", "Annuler"];
         const icons = [

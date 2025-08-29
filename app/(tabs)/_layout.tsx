@@ -1,7 +1,17 @@
 import { Ionicons } from "@expo/vector-icons";
 import { Tabs } from "expo-router";
+import { useEffect } from "react";
+import { useUser } from "../../contexts/user.context";
 
 export default function RootLayout() {
+  const { user, setUser } = useUser();
+
+  useEffect(() => {
+    if (!user) {
+      setUser();
+    }
+  }, [user, setUser]);
+
   return (
     <Tabs
       screenOptions={{
@@ -17,12 +27,11 @@ export default function RootLayout() {
         }}
       />
       <Tabs.Screen
-        name="favorite"
+        name="user"
         options={{
-          title: "Favorites",
-          headerShown: true,
+          title: "Compte",
           tabBarIcon: ({ size, color, focused }) => (
-            <Ionicons name={focused ? "star" : "star-outline"} size={size} color={color} />
+            <Ionicons name={focused ? "person" : "person-outline"} size={size} color={color} />
           ),
         }}
       />
