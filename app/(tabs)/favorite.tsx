@@ -1,8 +1,8 @@
-import { useCallback, useEffect, useState } from "react";
-import { StyleSheet, View } from "react-native";
-
 import { useFavorite } from "@/contexts/favorite.context";
 import { Movie } from "@/types/types";
+import { useCallback, useEffect, useState } from "react";
+import { StyleSheet, View } from "react-native";
+import { SystemBars } from "react-native-edge-to-edge";
 
 import ListItem from "@/components/ListItem";
 
@@ -39,6 +39,7 @@ export default function Index() {
 
   return (
     <View style={styles.container}>
+      <SystemBars style="auto" />
       <ListItem
         onPressSearch={onPressSearch}
         onPressClear={onPressClear}

@@ -165,12 +165,6 @@ export default function ListItem({
 
   return (
     <View>
-      {/* <CustomTextInput
-        searchQuery={searchQuery}
-        setSearchQuery={setSearchQuery}
-        onPressSearch={onListPressSearch}
-        onPressClear={onListPressClear}
-      /> */}
       <VirtualizedList
         data={moviesResults}
         renderItem={renderItem}

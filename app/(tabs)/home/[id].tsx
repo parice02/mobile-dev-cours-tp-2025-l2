@@ -4,6 +4,7 @@ import ParallaxScrollView from "@/components/ParallaxScrollView";
 import { useLocalSearchParams, useNavigation } from "expo-router";
 import { useEffect, useState } from "react";
 import { ActivityIndicator, StyleSheet, View } from "react-native";
+import { SystemBars } from "react-native-edge-to-edge";
 
 import { getMovieDetail } from "@/data/tools";
 import { MovieDetail } from "@/types/types";
@@ -37,13 +38,18 @@ const DetailsScreen = () => {
   if (!movie) return null;
 
   return (
-    <ParallaxScrollView
-      headerImage={<Image uri={movie.backdrop_path} title={movie.title} style={styles.backdrop} />}
-      headerBackgroundColor={{ light: "#fff", dark: "#000" }}
-      title={movie.title}
-      tagline={movie.tagline}>
-      <Detail movie={movie} />
-    </ParallaxScrollView>
+    <>
+      <SystemBars style="auto" />
+      <ParallaxScrollView
+        headerImage={
+          <Image uri={movie.backdrop_path} title={movie.title} style={styles.backdrop} />
+        }
+        headerBackgroundColor={{ light: "#fff", dark: "#000" }}
+        title={movie.title}
+        tagline={movie.tagline}>
+        <Detail movie={movie} />
+      </ParallaxScrollView>
+    </>
   );
 };
 
