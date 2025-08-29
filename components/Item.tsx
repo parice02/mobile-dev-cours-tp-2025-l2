@@ -1,4 +1,6 @@
+import { useFavorite } from "@/contexts/favorite.context";
 import { StyleSheet, Text, View } from "react-native";
+import * as Animatable from "react-native-animatable";
 
 import Image from "@/components/ImageURI";
 import { genres } from "@/data/genre";
@@ -80,14 +82,32 @@ const styles = StyleSheet.create({
     color: "#ff9800",
     fontWeight: "600",
   },
+  favoriteText: {
+    fontSize: 20,
+    marginLeft: 8,
+  },
 });
 
 const Item = ({ item }: { item: Movie }) => {
+  const { favorites } = useFavorite();
   return (
     <View style={styles.item}>
       <Image uri={item.poster_path} style={styles.avatar} title={item.title} />
       <View style={styles.content}>
-        <Text style={styles.itemTitle}>{item.title}</Text>
+        <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
+          <Text style={styles.itemTitle} >{item.title}</Text>
+          {favorites.find((m) => m.id === item.id) ? (
+            <Animatable.Text
+              animation={"pulse"}
+              useNativeDriver={true}
+              iterationCount={"infinite"}
+              style={styles.favoriteText}>
+              ❤️
+            </Animatable.Text>
+          ) : (
+            <Text style={styles.favoriteText}>🤍</Text>
+          )}
+        </View>
         <Text style={styles.itemOverview} numberOfLines={3} ellipsizeMode={"tail"}>
           {item.overview}
         </Text>

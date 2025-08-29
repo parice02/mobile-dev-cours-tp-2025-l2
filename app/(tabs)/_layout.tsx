@@ -10,7 +10,7 @@ export default function RootLayout() {
       <Tabs.Screen
         name="home"
         options={{
-          title: "Movies Database",
+          title: "Accueil",
           tabBarIcon: ({ size, color, focused }) => (
             <Ionicons name={focused ? "home" : "home-outline"} size={size} color={color} />
           ),
@@ -20,6 +20,7 @@ export default function RootLayout() {
         name="favorite"
         options={{
           title: "Favorites",
+          headerShown: true,
           tabBarIcon: ({ size, color, focused }) => (
             <Ionicons name={focused ? "star" : "star-outline"} size={size} color={color} />
           ),

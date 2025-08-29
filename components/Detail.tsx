@@ -10,7 +10,14 @@ const DetailsScreen = ({ movie }: { movie: MovieDetail }) => {
       <View style={styles.posterSection}>
         <Image uri={movie.poster_path} style={styles.poster} title={movie.title} />
         <View style={styles.meta}>
-          <Text>📅 {movie.release_date}</Text>
+          <Text>
+            🗓️
+            {new Date(movie.release_date).toLocaleDateString("fr", {
+              year: "numeric",
+              month: "long",
+              day: "2-digit",
+            })}
+          </Text>
           <Text>
             ⭐ {movie.vote_average} ({movie.vote_count} votes)
           </Text>
