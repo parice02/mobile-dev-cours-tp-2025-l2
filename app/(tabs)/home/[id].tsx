@@ -30,7 +30,7 @@ const DetailsScreen = () => {
   if (loading) {
     return (
       <View style={styles.loader}>
-        <ActivityIndicator size="large" color="#E50914" />
+        <ActivityIndicator size={"large"} color={"#E50914"} />
       </View>
     );
   }
@@ -39,7 +39,7 @@ const DetailsScreen = () => {
 
   return (
     <>
-      <SystemBars style="auto" />
+      <SystemBars style={"auto"} />
       <ParallaxScrollView
         headerImage={
           <Image uri={movie.backdrop_path} title={movie.title} style={styles.backdrop} />

@@ -56,7 +56,7 @@ export default function Index() {
 
   return (
     <View style={styles.container}>
-      <SystemBars style="auto" />
+      <SystemBars style={"auto"} />
       <ListItem
         onPressSearch={onPressSearch}
         onPressClear={onPressClear}
