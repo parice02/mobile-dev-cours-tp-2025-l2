@@ -1,11 +1,11 @@
 {
   "expo": {
-    "name": "App UVBF 2025",
-    "slug": "uvbf2025-app",
+    "name": "TMDB Movies App",
+    "slug": "tmdb-movies-app",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "uvbf2025app",
+    "scheme": "tmdb-movies-app",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
