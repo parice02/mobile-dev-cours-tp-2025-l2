@@ -8,14 +8,16 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: "#fff",
     borderRadius: 12,
-    margin: 10,
+    marginVertical: 10,
+    marginLeft: 30,
+    marginRight: 30,
     paddingHorizontal: 10,
     borderWidth: 1,
     borderColor: "#e0e0e0",
   },
   searchInput: {
     flex: 1,
-    marginLeft: 6,
+
     fontSize: 16,
     color: "#000",
   },

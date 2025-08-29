@@ -7,9 +7,9 @@ import { Pressable, View, VirtualizedList } from "react-native";
 import EmptyComponent from "@/components/EmptyComponent";
 import Item from "@/components/Item";
 import ItemSeparator from "@/components/ItemSeparator";
-import CustomTextInput from "@/components/TextInput";
 import { Movie } from "@/types/types";
 
+import CustomTextInput from "@/components/TextInput";
 import { useFavorite } from "@/contexts/favorite.context";
 
 export default function ListItem({
@@ -42,12 +42,12 @@ export default function ListItem({
     setLoading(false);
   }, [searchQuery, onEndReached]);
 
-  const onListPressClear = async () => {
+  const onListPressClear = useCallback(async () => {
     setLoading(true);
     setSearchQuery("");
     await onPressClear();
     setLoading(false);
-  };
+  }, [onPressClear]);
 
   const onLongPress = useCallback(
     (item: Movie) => {
@@ -151,6 +151,7 @@ export default function ListItem({
 
   useEffect(() => {
     navigation.setOptions({
+      headerStyle: { backgroundColor: "#fff" },
       header: () => (
         <CustomTextInput
           searchQuery={searchQuery}
@@ -160,7 +161,7 @@ export default function ListItem({
         />
       ),
     });
-  }, [navigation, searchQuery, onListPressSearch, onListPressClear]);
+  }, [navigation, onListPressSearch, onListPressClear, searchQuery]);
 
   return (
     <View>
@@ -181,6 +182,7 @@ export default function ListItem({
         refreshing={loading}
         onEndReached={onListEndReached}
         onRefresh={onRefresh}
+        contentInsetAdjustmentBehavior={"automatic"}
       />
     </View>
   );
