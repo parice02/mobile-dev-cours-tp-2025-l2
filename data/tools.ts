@@ -1,9 +1,11 @@
 import { Movie, MovieDetail, Movies, User } from "@/types/types";
+import { getLocales } from "expo-localization";
 
+const locale = getLocales().at(0)?.languageCode || "fr-FR";
 const token = process.env.EXPO_PUBLIC_TOKEN || "";
-const list_url = `https://api.themoviedb.org/3/discover/movie?language=fr-FR&include_adult=true&include_video=true&sort_by=popularity.desc`;
-const detail_url = "https://api.themoviedb.org/3/movie/movie_id?language=en-US";
-const search_url = "https://api.themoviedb.org/3/search/movie?language=fr-FR&include_adult=true";
+const list_url = `https://api.themoviedb.org/3/discover/movie?language=${locale}&include_adult=true&include_video=true&sort_by=popularity.desc`;
+const detail_url = `https://api.themoviedb.org/3/movie/movie_id?language=${locale}`;
+const search_url = `https://api.themoviedb.org/3/search/movie?language=${locale}&include_adult=true`;
 const account_url = "https://api.themoviedb.org/3/account/0";
 
 export const favoriteMovies: Movie[] = [];
