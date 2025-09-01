@@ -51,7 +51,6 @@ export default function ListItem({
 
   const onLongPress = useCallback(
     (item: Movie) => {
-      console.log(navigation.getId());
       if (navigation.getId() === "/(tabs)/home") {
         const options = ["Ajouter aux favoris", "Annuler"];
         const icons = [
@@ -152,7 +151,6 @@ export default function ListItem({
 
   useEffect(() => {
     navigation.setOptions({
-      headerStyle: { backgroundColor: "#fff" },
       header: () => (
         <CustomTextInput
           searchQuery={searchQuery}

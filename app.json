@@ -34,7 +34,15 @@
           "backgroundColor": "#ffffff"
         }
       ],
-      "react-native-edge-to-edge",
+      [
+        "react-native-edge-to-edge",
+        {
+          "android": {
+            "parentTheme": "Default",
+            "enforceNavigationBarContrast": true
+          }
+        }
+      ],
       "expo-localization"
     ],
     "experiments": {
