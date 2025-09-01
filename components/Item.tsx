@@ -1,11 +1,74 @@
 import { ThemedText } from "@/components/ThemedText";
 import { useFavorite } from "@/contexts/favorite.context";
+import { memo } from "react";
 import { StyleSheet, View } from "react-native";
 import * as Animatable from "react-native-animatable";
 
 import Image from "@/components/ImageURI";
 import { genres } from "@/data/genre";
 import { Movie } from "@/types/types";
+
+const Item = ({ item }: { item: Movie }) => {
+  const { favorites } = useFavorite();
+  return (
+    <View style={styles.item}>
+      <Image uri={item.poster_path} style={styles.avatar} title={item.title} />
+      <View style={styles.content}>
+        <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
+          <ThemedText style={styles.itemTitle}>{item.title}</ThemedText>
+          {favorites.find((m) => m.id === item.id) ? (
+            <Animatable.Text
+              animation={"pulse"}
+              useNativeDriver={true}
+              iterationCount={"infinite"}
+              style={styles.favoriteText}>
+              ❤️
+            </Animatable.Text>
+          ) : (
+            <ThemedText style={styles.favoriteText}>🤍</ThemedText>
+          )}
+        </View>
+        <ThemedText style={styles.itemOverview} numberOfLines={3} ellipsizeMode={"tail"}>
+          {item.overview}
+        </ThemedText>
+        <View style={styles.genresContainer}>
+          {item.genre_ids.map((genreId: number) => {
+            const genre = genres.results.find((g) => g.id === genreId);
+            return (
+              <View key={genreId} style={styles.genreBadge}>
+                <ThemedText style={styles.genreText}>{genre?.name}</ThemedText>
+              </View>
+            );
+          })}
+        </View>
+        <View style={styles.itemSubtitle}>
+          <View style={styles.badge}>
+            <ThemedText style={styles.badgeText}>
+              🗓️&ensp;
+              {new Date(item.release_date).toLocaleDateString("fr", {
+                year: "numeric",
+                month: "long",
+                day: "2-digit",
+              })}
+            </ThemedText>
+          </View>
+          <View style={styles.badge}>
+            <ThemedText style={[styles.badgeText, styles.badgeRating]}>
+              ⭐&ensp;{item.vote_average}/10
+            </ThemedText>
+          </View>
+          <View style={styles.badge}>
+            <ThemedText style={[styles.badgeText, styles.badgeRating]}>
+              {item.adult ? "🔞" : "👨‍👩‍👧"}
+            </ThemedText>
+          </View>
+        </View>
+      </View>
+    </View>
+  );
+};
+
+export default memo(Item);
 
 const styles = StyleSheet.create({
   item: {
@@ -88,65 +151,3 @@ const styles = StyleSheet.create({
     marginLeft: 8,
   },
 });
-
-const Item = ({ item }: { item: Movie }) => {
-  const { favorites } = useFavorite();
-  return (
-    <View style={styles.item}>
-      <Image uri={item.poster_path} style={styles.avatar} title={item.title} />
-      <View style={styles.content}>
-        <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
-          <ThemedText style={styles.itemTitle}>{item.title}</ThemedText>
-          {favorites.find((m) => m.id === item.id) ? (
-            <Animatable.Text
-              animation={"pulse"}
-              useNativeDriver={true}
-              iterationCount={"infinite"}
-              style={styles.favoriteText}>
-              ❤️
-            </Animatable.Text>
-          ) : (
-            <ThemedText style={styles.favoriteText}>🤍</ThemedText>
-          )}
-        </View>
-        <ThemedText style={styles.itemOverview} numberOfLines={3} ellipsizeMode={"tail"}>
-          {item.overview}
-        </ThemedText>
-        <View style={styles.genresContainer}>
-          {item.genre_ids.map((genreId: number) => {
-            const genre = genres.results.find((g) => g.id === genreId);
-            return (
-              <View key={genreId} style={styles.genreBadge}>
-                <ThemedText style={styles.genreText}>{genre?.name}</ThemedText>
-              </View>
-            );
-          })}
-        </View>
-        <View style={styles.itemSubtitle}>
-          <View style={styles.badge}>
-            <ThemedText style={styles.badgeText}>
-              🗓️&ensp;
-              {new Date(item.release_date).toLocaleDateString("fr", {
-                year: "numeric",
-                month: "long",
-                day: "2-digit",
-              })}
-            </ThemedText>
-          </View>
-          <View style={styles.badge}>
-            <ThemedText style={[styles.badgeText, styles.badgeRating]}>
-              ⭐&ensp;{item.vote_average}/10
-            </ThemedText>
-          </View>
-          <View style={styles.badge}>
-            <ThemedText style={[styles.badgeText, styles.badgeRating]}>
-              {item.adult ? "🔞" : "👨‍👩‍👧"}
-            </ThemedText>
-          </View>
-        </View>
-      </View>
-    </View>
-  );
-};
-
-export default Item;

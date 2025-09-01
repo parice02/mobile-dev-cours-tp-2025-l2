@@ -1,7 +1,7 @@
 import { useActionSheet } from "@expo/react-native-action-sheet";
 import { Ionicons } from "@expo/vector-icons";
 import { Link, useNavigation } from "expo-router";
-import { useCallback, useEffect, useState } from "react";
+import { memo, useCallback } from "react";
 import { Pressable, View, VirtualizedList } from "react-native";
 
 import EmptyComponent from "@/components/EmptyComponent";
@@ -9,45 +9,24 @@ import Item from "@/components/Item";
 import ItemSeparator from "@/components/ItemSeparator";
 import { Movie } from "@/types/types";
 
-import CustomTextInput from "@/components/TextInput";
 import { useFavorite } from "@/contexts/favorite.context";
 
-export default function ListItem({
-  onPressSearch,
-  onPressClear,
+function ListItem({
+  isLoading,
   moviesResults,
   onEndReached,
 }: {
-  onPressSearch: (searchQuery: string) => Promise<void>;
-  onPressClear: () => Promise<void>;
+  isLoading: boolean;
   moviesResults: Movie[];
-  onEndReached: (searchQuery: string) => Promise<void>;
+  onEndReached: () => Promise<void>;
 }) {
-  const [searchQuery, setSearchQuery] = useState("");
-  const [loading, setLoading] = useState(true);
   const { addFavorite, removeFavorite } = useFavorite();
   const navigation = useNavigation();
-
   const { showActionSheetWithOptions } = useActionSheet();
 
-  const onListPressSearch = useCallback(async () => {
-    setLoading(true);
-    await onPressSearch(searchQuery);
-    setLoading(false);
-  }, [searchQuery, onPressSearch]);
-
   const onListEndReached = useCallback(async () => {
-    setLoading(true);
-    await onEndReached(searchQuery);
-    setLoading(false);
-  }, [searchQuery, onEndReached]);
-
-  const onListPressClear = useCallback(async () => {
-    setLoading(true);
-    setSearchQuery("");
-    await onPressClear();
-    setLoading(false);
-  }, [onPressClear]);
+    await onEndReached();
+  }, [onEndReached]);
 
   const onLongPress = useCallback(
     (item: Movie) => {
@@ -86,7 +65,7 @@ export default function ListItem({
             }
           },
         );
-      } else if (navigation.getId() === "/(tabs)/favorite") {
+      } else if (navigation.getId() === "/(tabs)/user") {
         const options = ["Retirer des favoris", "Annuler"];
         const icons = [
           <Ionicons name="heart-dislike" size={24} color="red" key={0} />,
@@ -149,19 +128,6 @@ export default function ListItem({
 
   const onRefresh = async () => {};
 
-  useEffect(() => {
-    navigation.setOptions({
-      header: () => (
-        <CustomTextInput
-          searchQuery={searchQuery}
-          setSearchQuery={setSearchQuery}
-          onPressSearch={onListPressSearch}
-          onPressClear={onListPressClear}
-        />
-      ),
-    });
-  }, [navigation, onListPressSearch, onListPressClear, searchQuery]);
-
   return (
     <View>
       <VirtualizedList
@@ -171,12 +137,16 @@ export default function ListItem({
         getItemCount={getItemCount}
         keyExtractor={keyExtractor}
         ItemSeparatorComponent={itemSeparator}
-        ListEmptyComponent={<EmptyComponent onRetry={onListPressSearch} />}
-        refreshing={loading}
+        ListEmptyComponent={<EmptyComponent />}
+        refreshing={isLoading}
         onEndReached={onListEndReached}
         onRefresh={onRefresh}
         contentInsetAdjustmentBehavior={"automatic"}
+        windowSize={5}
+        maxToRenderPerBatch={10}
+        removeClippedSubviews
       />
     </View>
   );
 }
+export default memo(ListItem);

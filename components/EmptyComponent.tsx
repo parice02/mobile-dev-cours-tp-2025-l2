@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Image, StyleSheet, Text, View } from "react-native";
 
 const styles = StyleSheet.create({
   container: {
@@ -24,19 +24,9 @@ const styles = StyleSheet.create({
     textAlign: "center",
     marginBottom: 20,
   },
-  button: {
-    backgroundColor: "#007AFF",
-    paddingHorizontal: 20,
-    paddingVertical: 10,
-    borderRadius: 20,
-  },
-  buttonText: {
-    color: "#fff",
-    fontWeight: "600",
-  },
 });
 
-const EmptyComponent = ({ onRetry }: { onRetry?: () => void }) => (
+const EmptyComponent = () => (
   <View style={styles.container}>
     <Image
       source={require("@/assets/images/content_not_found.png")}
@@ -47,11 +37,6 @@ const EmptyComponent = ({ onRetry }: { onRetry?: () => void }) => (
     <Text style={styles.subtitle}>
       Nous n’avons trouvé aucun film correspondant. Essayez une autre recherche.
     </Text>
-    {onRetry && (
-      <TouchableOpacity style={styles.button} onPress={onRetry}>
-        <Text style={styles.buttonText}>🔄 Réessayer</Text>
-      </TouchableOpacity>
-    )}
   </View>
 );
 
