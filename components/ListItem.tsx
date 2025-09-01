@@ -24,10 +24,6 @@ function ListItem({
   const navigation = useNavigation();
   const { showActionSheetWithOptions } = useActionSheet();
 
-  const onListEndReached = useCallback(async () => {
-    await onEndReached();
-  }, [onEndReached]);
-
   const onLongPress = useCallback(
     (item: Movie) => {
       const options = ["Annuler"];
@@ -115,9 +111,9 @@ function ListItem({
   );
   const itemSeparator = useCallback(() => <ItemSeparator />, []);
 
-  const getItem = useCallback((data: any, index: number) => data[index], []);
-  const keyExtractor = useCallback((item: any) => `${item.id}`, []);
-  const getItemCount = useCallback((data: any) => data.length, []);
+  const getItem = useCallback((data: Movie[], index: number) => data[index], []);
+  const keyExtractor = useCallback((item: Movie) => `${item.id}`, []);
+  const getItemCount = useCallback((data: Movie[]) => data.length, []);
 
   const onRefresh = async () => {};
 
@@ -132,7 +128,7 @@ function ListItem({
         ItemSeparatorComponent={itemSeparator}
         ListEmptyComponent={<EmptyComponent />}
         refreshing={isLoading}
-        onEndReached={onListEndReached}
+        onEndReached={onEndReached}
         onRefresh={onRefresh}
         contentInsetAdjustmentBehavior={"automatic"}
         windowSize={5}
