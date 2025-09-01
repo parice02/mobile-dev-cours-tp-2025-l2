@@ -1,12 +1,12 @@
 import Detail from "@/components/Detail";
 import Image from "@/components/ImageURI";
 import ParallaxScrollView from "@/components/ParallaxScrollView";
+import { useServer } from "@/contexts/server.context";
 import { useLocalSearchParams, useNavigation } from "expo-router";
 import { useEffect, useState } from "react";
 import { ActivityIndicator, StyleSheet, View } from "react-native";
 import { SystemBars } from "react-native-edge-to-edge";
 
-import { getMovieDetail } from "@/data/tools";
 import { MovieDetail } from "@/types/types";
 
 const DetailsScreen = () => {
@@ -14,6 +14,7 @@ const DetailsScreen = () => {
   const [loading, setLoading] = useState(true);
   const [movie, setMovie] = useState<MovieDetail | null>(null);
   const navigation = useNavigation();
+  const { getMovieDetail } = useServer();
 
   useEffect(() => {
     (async () => {
@@ -25,7 +26,7 @@ const DetailsScreen = () => {
       }
       setLoading(false);
     })();
-  }, [id, navigation]);
+  }, [id, navigation, getMovieDetail]);
 
   if (loading) {
     return (

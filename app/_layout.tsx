@@ -8,6 +8,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 import { FavoriteProvider } from "@/contexts/favorite.context";
 import { useColorScheme } from "@/hooks/useColorScheme";
+import { ServerProvider } from "../contexts/server.context";
 import { UserProvider } from "../contexts/user.context";
 
 export default function RootLayout() {
@@ -23,18 +24,20 @@ export default function RootLayout() {
   return (
     <SafeAreaView style={{ flex: 1 }} edges={["top", "left", "right"]}>
       <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
-        <ActionSheetProvider>
-          <FavoriteProvider>
-            <UserProvider>
-              <Stack
-                screenOptions={{
-                  headerShown: false,
-                }}>
-                <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-              </Stack>
-            </UserProvider>
-          </FavoriteProvider>
-        </ActionSheetProvider>
+        <ServerProvider>
+          <ActionSheetProvider>
+            <FavoriteProvider>
+              <UserProvider>
+                <Stack
+                  screenOptions={{
+                    headerShown: false,
+                  }}>
+                  <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+                </Stack>
+              </UserProvider>
+            </FavoriteProvider>
+          </ActionSheetProvider>
+        </ServerProvider>
       </ThemeProvider>
     </SafeAreaView>
   );

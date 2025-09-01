@@ -3,6 +3,18 @@ export interface Genre {
   name: string;
 }
 
+export interface Header {
+  [key: string]: string;
+}
+
+export interface QueryParameter {
+  [key: string]: string;
+}
+
+export interface Request {
+  [key: string]: string | AbortSignal | Headers | FormData;
+}
+
 export interface Movie {
   id: number;
   title: string;
@@ -20,11 +32,22 @@ export interface Movie {
   vote_count: number;
 }
 
-interface Company {
+export interface Company {
   id: number;
   name: string;
   logo_path: string;
   origin_country: string;
+}
+
+export interface Language {
+  iso_639_1: string;
+  name: string;
+  english_name: string;
+}
+
+export interface Country {
+  iso_3166_1: string;
+  name: string;
 }
 
 export interface MovieDetail {
@@ -48,10 +71,10 @@ export interface MovieDetail {
   imdb_id: string;
   origin_country: string[];
   production_companies: Company[];
-  production_countries: { iso_3166_1: string; name: string }[];
+  production_countries: Country[];
   revenue: number;
   runtime: number;
-  spoken_languages: { iso_639_1: string; name: string; english_name: string }[];
+  spoken_languages: Language[];
   status: string;
   tagline: string;
 }
@@ -79,3 +102,5 @@ export interface User {
   iso_3166_1: string;
   include_adult: boolean;
 }
+
+export type RequestResponse = Movies | MovieDetail | User;

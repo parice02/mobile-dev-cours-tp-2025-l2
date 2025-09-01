@@ -1,4 +1,4 @@
-import { getUser } from "@/data/tools";
+import { useServer } from "@/contexts/server.context";
 import { User } from "@/types/types";
 import { createContext, useCallback, useContext, useMemo, useReducer } from "react";
 
@@ -21,11 +21,12 @@ export const reducer = (state: User | null, action: { type: string; payload: Use
 
 export const UserProvider = ({ children }: { children: React.ReactNode }) => {
   const [user, dispatch] = useReducer(reducer, null);
+  const { getAccountInfo } = useServer();
 
   const setUser = useCallback(async () => {
-    const fetchedUser = await getUser();
+    const fetchedUser = await getAccountInfo();
     dispatch({ type: "ADD_USER", payload: fetchedUser });
-  }, [dispatch]);
+  }, [dispatch, getAccountInfo]);
 
   const deleteUser = useCallback(() => {
     dispatch({ type: "DELETE_USER", payload: null });
