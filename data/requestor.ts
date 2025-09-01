@@ -2,7 +2,7 @@ import { Header, MovieDetail, Movies, QueryParameter, User } from "@/types/types
 import * as Application from "expo-application";
 import { getLocales } from "expo-localization";
 
-const locale = getLocales().at(0)?.languageCode || "fr-FR";
+const locale = getLocales().at(0)?.languageTag || "fr-FR";
 const SERVER_ENDPOINT = process.env.EXPO_PUBLIC_SERVER_ENDPOINT || "";
 const TOKEN = process.env.EXPO_PUBLIC_TOKEN || "";
 const DEFAULT_TIMEOUT = 10_000; // millisecondes
