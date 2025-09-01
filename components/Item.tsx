@@ -24,9 +24,7 @@ const Item = ({ item }: { item: Movie }) => {
               style={styles.favoriteText}>
               ❤️
             </Animatable.Text>
-          ) : (
-            <ThemedText style={styles.favoriteText}>🤍</ThemedText>
-          )}
+          ) : null}
         </View>
         <ThemedText style={styles.itemOverview} numberOfLines={3} ellipsizeMode={"tail"}>
           {item.overview}
@@ -76,7 +74,6 @@ const styles = StyleSheet.create({
     alignItems: "flex-start",
     backgroundColor: "#fff", // fond blanc type "card"
     marginHorizontal: 12,
-    marginVertical: 5,
     padding: 12,
     borderRadius: 12, // arrondi doux
     shadowColor: "#000", // ombre iOS
