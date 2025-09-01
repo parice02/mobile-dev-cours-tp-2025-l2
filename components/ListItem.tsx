@@ -30,79 +30,72 @@ function ListItem({
 
   const onLongPress = useCallback(
     (item: Movie) => {
+      const options = ["Annuler"];
+      let icons: any[] = [];
+      let message = "";
       if (navigation.getId() === "/(tabs)/home") {
-        const options = ["Ajouter aux favoris", "Annuler"];
-        const icons = [
+        options.unshift("Ajouter aux favoris");
+        message = "Voulez-vous vraiment ajouter ce film aux favoris ?";
+        icons = [
           <Ionicons name="heart" size={24} color="red" key={0} />,
           <Ionicons name="close" size={24} color="black" key={1} />,
         ];
-        const cancelButtonIndex = 1;
-        const cancelButtonTintColor = "#e0e0e0";
-        const title = "Options";
-        const tintColor = "#000";
-        const message = "Voulez-vous vraiment ajouter ce film aux favoris ?";
-
-        showActionSheetWithOptions(
-          {
-            options,
-            cancelButtonIndex,
-            cancelButtonTintColor,
-            title,
-            tintColor,
-            message,
-            icons,
-            showSeparators: true,
-            separatorStyle: { backgroundColor: "#eee", height: 0.4 },
-          },
-          (selectedIndex: number | undefined) => {
-            switch (selectedIndex) {
-              case 0:
-                addFavorite(item);
-                break;
-
-              case cancelButtonIndex:
-                break;
-            }
-          },
-        );
       } else if (navigation.getId() === "/(tabs)/user") {
-        const options = ["Retirer des favoris", "Annuler"];
-        const icons = [
+        options.unshift("Retirer des favoris");
+        message = "Voulez-vous retirer ce film des favoris ?";
+        icons = [
           <Ionicons name="heart-dislike" size={24} color="red" key={0} />,
           <Ionicons name="close" size={24} color="black" key={1} />,
         ];
-        const destructiveButtonIndex = 0;
-        const cancelButtonIndex = 1;
-        const cancelButtonTintColor = "#e0e0e0";
-        const title = "Options";
-        const tintColor = "#000";
-        const message = "Voulez-vous retirer ce film des favoris ?";
-
-        showActionSheetWithOptions(
-          {
-            options,
-            cancelButtonIndex,
-            cancelButtonTintColor,
-            destructiveButtonIndex,
-            title,
-            tintColor,
-            message,
-            icons,
-            showSeparators: true,
-            separatorStyle: { backgroundColor: "#eee", height: 0.4 },
-          },
-          (selectedIndex: number | undefined) => {
-            switch (selectedIndex) {
-              case 0:
-                removeFavorite(item);
-                break;
-
-              case cancelButtonIndex:
-                break;
-            }
-          },
-        );
       }
+
+      const cancelButtonIndex = 1;
+      const cancelButtonTintColor = "#e0e0e0";
+      const title = "Options";
+      const tintColor = "#000";
+
+      const actions = {
+        options,
+        cancelButtonIndex,
+        cancelButtonTintColor,
+        title,
+        tintColor,
+        message,
+        icons,
+        showSeparators: true,
+        separatorStyle: { backgroundColor: "#eee", height: 0.4 },
+      };
+
+      const addFavoriteAction = (selectedIndex?: number) => {
+        switch (selectedIndex) {
+          case 0:
+            addFavorite(item);
+            break;
+
+          case 1:
+            break;
+        }
+      };
+
+      const removeFavoriteAction = (selectedIndex?: number) => {
+        switch (selectedIndex) {
+          case 0:
+            removeFavorite(item);
+            break;
+
+          case 1:
+            break;
+        }
+      };
+
+      showActionSheetWithOptions(
+        actions,
+        navigation.getId() === "/(tabs)/home"
+          ? addFavoriteAction
+          : navigation.getId() === "/(tabs)/user"
+          ? removeFavoriteAction
+          : () => {},
+      );
     },
     [showActionSheetWithOptions, addFavorite, removeFavorite, navigation],
   );
