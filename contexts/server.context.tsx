@@ -1,4 +1,4 @@
-import AppClientService from "@/data/requestor";
+import AppClientService from "@/server";
 import { createContext, ReactElement, useCallback, useContext, useMemo } from "react";
 
 const client = new AppClientService();

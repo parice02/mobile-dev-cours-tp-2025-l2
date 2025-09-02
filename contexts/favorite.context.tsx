@@ -1,5 +1,6 @@
 import { Movie } from "@/types/types";
-import { createContext, useCallback, useContext, useMemo, useReducer } from "react";
+import { createContext, useCallback, useContext, useMemo } from "react";
+import { useMMKVObject } from "react-native-mmkv";
 
 const FavoriteContext = createContext({
   favorites: [] as Movie[],
@@ -7,36 +8,32 @@ const FavoriteContext = createContext({
   removeFavorite: (movie: Movie) => {},
 });
 
-export const reducer = (state: Movie[], action: { type: string; payload: Movie }) => {
-  switch (action.type) {
-    case "ADD_FAVORITE_MOVIES":
-      return [...state, action.payload];
-    case "REMOVE_FAVORITE_MOVIES":
-      return state.filter((movie) => movie.id !== action.payload.id);
-    default:
-      return state;
-  }
-};
-
 export const FavoriteProvider = ({ children }: { children: React.ReactNode }) => {
-  const [favorites, dispatch] = useReducer(reducer, []);
+  const [favorites = [], setFavorites] = useMMKVObject<Movie[]>("favorites");
 
   const addFavorite = useCallback(
     (movie: Movie) => {
-      if (!favorites.find((m) => m.id === movie.id)) {
-        dispatch({ type: "ADD_FAVORITE_MOVIES", payload: movie });
+      if (favorites.length === 0) {
+        setFavorites([movie]);
+      } else {
+        if (!favorites.find((m) => m.id === movie.id)) {
+          setFavorites([...favorites, movie]);
+        }
       }
     },
-    [favorites],
+    [favorites, setFavorites],
   );
 
   const removeFavorite = useCallback(
     (movie: Movie) => {
-      if (favorites.find((m) => m.id === movie.id)) {
-        dispatch({ type: "REMOVE_FAVORITE_MOVIES", payload: movie });
+      if (!(favorites.length === 0)) {
+        if (favorites.find((m) => m.id === movie.id)) {
+          favorites.filter((m) => m.id !== movie.id);
+          setFavorites(favorites);
+        }
       }
     },
-    [favorites],
+    [favorites, setFavorites],
   );
 
   const value = useMemo(
