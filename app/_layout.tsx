@@ -4,7 +4,7 @@ import { ActionSheetProvider } from "@expo/react-native-action-sheet";
 import { DarkTheme, DefaultTheme, ThemeProvider } from "@react-navigation/native";
 import { useFonts } from "expo-font";
 import { Stack } from "expo-router";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { SafeAreaProvider } from "react-native-safe-area-context";
 
 import { FavoriteProvider } from "@/contexts/favorite.context";
 import { useColorScheme } from "@/hooks/useColorScheme";
@@ -22,7 +22,7 @@ export default function RootLayout() {
     return null;
   }
   return (
-    <SafeAreaView style={{ flex: 1 }} edges={["top", "left", "right"]}>
+    <SafeAreaProvider>
       <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
         <ServerProvider>
           <ActionSheetProvider>
@@ -39,6 +39,6 @@ export default function RootLayout() {
           </ActionSheetProvider>
         </ServerProvider>
       </ThemeProvider>
-    </SafeAreaView>
+    </SafeAreaProvider>
   );
 }

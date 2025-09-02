@@ -1,8 +1,9 @@
 import { useFavorite } from "@/contexts/favorite.context";
 import { Movie } from "@/types/types";
 import { useCallback, useEffect, useState } from "react";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet } from "react-native";
 import { SystemBars } from "react-native-edge-to-edge";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 import ListItem from "@/components/ListItem";
 
@@ -43,9 +44,9 @@ export default function Index() {
   }, [favorites]);
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <SystemBars style={"auto"} />
       <ListItem moviesResults={moviesResults} onEndReached={onEndReached} isLoading={loading} />
-    </View>
+    </SafeAreaView>
   );
 }

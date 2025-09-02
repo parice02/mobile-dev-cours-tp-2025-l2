@@ -6,6 +6,7 @@ import { useLocalSearchParams, useNavigation } from "expo-router";
 import { useEffect, useState } from "react";
 import { ActivityIndicator, StyleSheet, View } from "react-native";
 import { SystemBars } from "react-native-edge-to-edge";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 import { MovieDetail } from "@/types/types";
 
@@ -39,7 +40,7 @@ const DetailsScreen = () => {
   if (!movie) return null;
 
   return (
-    <>
+    <SafeAreaView style={styles.container}>
       <SystemBars style={"auto"} />
       <ParallaxScrollView
         headerImage={
@@ -50,13 +51,14 @@ const DetailsScreen = () => {
         tagline={movie.tagline}>
         <Detail movie={movie} />
       </ParallaxScrollView>
-    </>
+    </SafeAreaView>
   );
 };
 
 export default DetailsScreen;
 
 const styles = StyleSheet.create({
+  container: { flex: 1 },
   loader: {
     flex: 1,
     justifyContent: "center",

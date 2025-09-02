@@ -4,8 +4,10 @@ import { useNavigation, useRouter } from "expo-router";
 import { useEffect } from "react";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { SystemBars } from "react-native-edge-to-edge";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const styles = StyleSheet.create({
+  firstContainer: { flex: 1 },
   container: {
     flex: 1,
     alignItems: "center",
@@ -72,43 +74,45 @@ export default function Index() {
   }
 
   return (
-    <View style={styles.container}>
-      {/* Avatar */}
-      <Image source={{ uri: avatarUrl }} style={styles.avatar} />
+    <SafeAreaView style={styles.firstContainer}>
+      <View style={styles.container}>
+        {/* Avatar */}
+        <Image source={{ uri: avatarUrl }} style={styles.avatar} />
 
-      {/* Username */}
-      <Text style={styles.username}>@{user.username}</Text>
+        {/* Username */}
+        <Text style={styles.username}>@{user.username}</Text>
 
-      {/* Infos */}
-      <View style={styles.infoRow}>
-        <Ionicons name="language" size={18} color="#555" />
-        <Text style={styles.infoText}>Langue : {user.iso_639_1.toUpperCase()}</Text>
+        {/* Infos */}
+        <View style={styles.infoRow}>
+          <Ionicons name="language" size={18} color="#555" />
+          <Text style={styles.infoText}>Langue : {user.iso_639_1.toUpperCase()}</Text>
+        </View>
+
+        <View style={styles.infoRow}>
+          <Ionicons name="flag" size={18} color="#555" />
+          <Text style={styles.infoText}>Pays : {user.iso_3166_1}</Text>
+        </View>
+
+        <View style={styles.infoRow}>
+          <Ionicons
+            name={user.include_adult ? "warning" : "shield-checkmark"}
+            size={18}
+            color={user.include_adult ? "#E74C3C" : "#27AE60"}
+          />
+          <Text style={styles.infoText}>
+            Contenu adulte : {user.include_adult ? "Autorisé" : "Filtré"}
+          </Text>
+        </View>
+
+        {/* Bouton favoris */}
+        <TouchableOpacity
+          style={styles.favoriteButton}
+          onPress={() => router.push("/(tabs)/user/favorite")}>
+          <Ionicons name="heart" size={20} color="#fff" style={{ marginRight: 6 }} />
+          <Text style={styles.favoriteText}>Voir mes favoris</Text>
+        </TouchableOpacity>
+        <SystemBars style={"auto"} />
       </View>
-
-      <View style={styles.infoRow}>
-        <Ionicons name="flag" size={18} color="#555" />
-        <Text style={styles.infoText}>Pays : {user.iso_3166_1}</Text>
-      </View>
-
-      <View style={styles.infoRow}>
-        <Ionicons
-          name={user.include_adult ? "warning" : "shield-checkmark"}
-          size={18}
-          color={user.include_adult ? "#E74C3C" : "#27AE60"}
-        />
-        <Text style={styles.infoText}>
-          Contenu adulte : {user.include_adult ? "Autorisé" : "Filtré"}
-        </Text>
-      </View>
-
-      {/* Bouton favoris */}
-      <TouchableOpacity
-        style={styles.favoriteButton}
-        onPress={() => router.push("/(tabs)/user/favorite")}>
-        <Ionicons name="heart" size={20} color="#fff" style={{ marginRight: 6 }} />
-        <Text style={styles.favoriteText}>Voir mes favoris</Text>
-      </TouchableOpacity>
-      <SystemBars style={"auto"} />
-    </View>
+    </SafeAreaView>
   );
 }

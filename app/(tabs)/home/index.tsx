@@ -2,8 +2,9 @@ import { useServer } from "@/contexts/server.context";
 import { Movie } from "@/types/types";
 import { useNavigation } from "expo-router";
 import { useCallback, useEffect, useState } from "react";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet } from "react-native";
 import { SystemBars } from "react-native-edge-to-edge";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 import ListItem from "@/components/ListItem";
 import CustomTextInput from "@/components/TextInput";
@@ -80,9 +81,9 @@ export default function Index() {
   }, [navigation, onPressSearch, onPressClear, searchQuery]);
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <SystemBars style={"auto"} />
       <ListItem isLoading={loading} moviesResults={moviesResults} onEndReached={onEndReached} />
-    </View>
+    </SafeAreaView>
   );
 }
