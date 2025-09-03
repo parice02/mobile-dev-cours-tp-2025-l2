@@ -1,12 +1,11 @@
 import Detail from "@/components/Detail";
 import Image from "@/components/ImageURI";
 import ParallaxScrollView from "@/components/ParallaxScrollView";
+import SafeAreaView from "@/components/SafeAreaView";
 import { useServer } from "@/contexts/server.context";
 import { useLocalSearchParams, useNavigation } from "expo-router";
 import { useEffect, useState } from "react";
 import { ActivityIndicator, StyleSheet, View } from "react-native";
-import { SystemBars } from "react-native-edge-to-edge";
-import { SafeAreaView } from "react-native-safe-area-context";
 
 import { MovieDetail } from "@/types/types";
 
@@ -40,8 +39,7 @@ const DetailsScreen = () => {
   if (!movie) return null;
 
   return (
-    <SafeAreaView style={styles.container}>
-      <SystemBars style={"auto"} />
+    <SafeAreaView>
       <ParallaxScrollView
         headerImage={
           <Image uri={movie.backdrop_path} title={movie.title} style={styles.backdrop} />

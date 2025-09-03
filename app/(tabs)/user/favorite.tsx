@@ -1,18 +1,9 @@
+import SafeAreaView from "@/components/SafeAreaView";
 import { useFavorite } from "@/contexts/favorite.context";
 import { Movie } from "@/types/types";
 import { useCallback, useEffect, useState } from "react";
-import { StyleSheet } from "react-native";
-import { SystemBars } from "react-native-edge-to-edge";
-import { SafeAreaView } from "react-native-safe-area-context";
 
 import ListItem from "@/components/ListItem";
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-  },
-});
 
 export default function Index() {
   const { favorites } = useFavorite();
@@ -44,8 +35,7 @@ export default function Index() {
   }, [favorites]);
 
   return (
-    <SafeAreaView style={styles.container}>
-      <SystemBars style={"auto"} />
+    <SafeAreaView>
       <ListItem moviesResults={moviesResults} onEndReached={onEndReached} isLoading={loading} />
     </SafeAreaView>
   );

@@ -1,20 +1,11 @@
+import SafeAreaView from "@/components/SafeAreaView";
 import { useServer } from "@/contexts/server.context";
 import { Movie } from "@/types/types";
 import { useNavigation } from "expo-router";
 import { useCallback, useEffect, useState } from "react";
-import { StyleSheet } from "react-native";
-import { SystemBars } from "react-native-edge-to-edge";
-import { SafeAreaView } from "react-native-safe-area-context";
 
 import ListItem from "@/components/ListItem";
 import CustomTextInput from "@/components/TextInput";
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-  },
-});
 
 export default function Index() {
   const [page, setPage] = useState(1);
@@ -81,8 +72,7 @@ export default function Index() {
   }, [navigation, onPressSearch, onPressClear, searchQuery]);
 
   return (
-    <SafeAreaView style={styles.container}>
-      <SystemBars style={"auto"} />
+    <SafeAreaView>
       <ListItem isLoading={loading} moviesResults={moviesResults} onEndReached={onEndReached} />
     </SafeAreaView>
   );

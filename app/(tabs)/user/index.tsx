@@ -1,18 +1,15 @@
+import SafeAreaView from "@/components/SafeAreaView";
 import { useUser } from "@/contexts/user.context";
 import { Ionicons } from "@expo/vector-icons";
 import { useNavigation, useRouter } from "expo-router";
 import { useEffect } from "react";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import { SystemBars } from "react-native-edge-to-edge";
-import { SafeAreaView } from "react-native-safe-area-context";
 
 const styles = StyleSheet.create({
-  firstContainer: { flex: 1 },
   container: {
     flex: 1,
     alignItems: "center",
     padding: 20,
-    backgroundColor: "#fff",
   },
   avatar: {
     width: 120,
@@ -74,7 +71,7 @@ export default function Index() {
   }
 
   return (
-    <SafeAreaView style={styles.firstContainer}>
+    <SafeAreaView>
       <View style={styles.container}>
         {/* Avatar */}
         <Image source={{ uri: avatarUrl }} style={styles.avatar} />
@@ -111,7 +108,6 @@ export default function Index() {
           <Ionicons name="heart" size={20} color="#fff" style={{ marginRight: 6 }} />
           <Text style={styles.favoriteText}>Voir mes favoris</Text>
         </TouchableOpacity>
-        <SystemBars style={"auto"} />
       </View>
     </SafeAreaView>
   );

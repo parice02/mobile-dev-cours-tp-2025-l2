@@ -26,7 +26,12 @@
       "favicon": "./assets/images/favicon.png"
     },
     "plugins": [
-      "expo-router",
+      [
+        "expo-router",
+        {
+          "sitemap": false
+        }
+      ],
       [
         "expo-splash-screen",
         {
@@ -41,11 +46,17 @@
         {
           "android": {
             "parentTheme": "Default",
-            "enforceNavigationBarContrast": true
+            "enforceNavigationBarContrast": false
           }
         }
       ],
-      "expo-localization"
+      "expo-localization",
+      [
+        "expo-dev-client",
+        {
+          "launchMode": "most-recent"
+        }
+      ]
     ],
     "experiments": {
       "typedRoutes": true
