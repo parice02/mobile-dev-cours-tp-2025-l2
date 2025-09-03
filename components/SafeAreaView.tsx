@@ -31,7 +31,7 @@ const SafeAreaView = memo(
     const {
       edges = ["right", "left"],
       style,
-      backgroundColor = "red",
+      backgroundColor = "white",
       systemBarStyle = "auto",
       systemBarHidden = false,
       children,

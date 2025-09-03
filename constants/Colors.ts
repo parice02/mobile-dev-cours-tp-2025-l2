@@ -6,7 +6,7 @@
 const tintColorLight = "#0a7ea4";
 const tintColorDark = "#fff";
 
-export const headerColor = "#fff";
+export const headerColor = "#0a7ea4";
 
 export const Colors = {
   light: {
