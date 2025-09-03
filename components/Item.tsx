@@ -72,10 +72,10 @@ const styles = StyleSheet.create({
   item: {
     flexDirection: "row",
     alignItems: "flex-start",
-    backgroundColor: "#fff", // fond blanc type "card"
-    marginHorizontal: 12,
-    padding: 12,
-    borderRadius: 12, // arrondi doux
+    backgroundColor: "#fff",
+    marginHorizontal: 10,
+    padding: 10,
+    borderRadius: 12,
     shadowColor: "#000", // ombre iOS
     shadowOpacity: 0.1,
     shadowOffset: { width: 0, height: 2 },
@@ -86,7 +86,7 @@ const styles = StyleSheet.create({
     width: 80,
     height: 120,
     borderRadius: 8,
-    backgroundColor: "#e0e0e0", // placeholder gris
+    backgroundColor: "#e0e0e0",
   },
   content: {
     flex: 1,

@@ -5,7 +5,6 @@ import { useNavigation } from "expo-router";
 import { useCallback, useEffect, useState } from "react";
 
 import ListItem from "@/components/ListItem";
-import CustomTextInput from "@/components/TextInput";
 
 export default function Index() {
   const [page, setPage] = useState(1);
@@ -58,7 +57,7 @@ export default function Index() {
     setLoading(false);
   }, [getMovies]);
 
-  useEffect(() => {
+  /* useEffect(() => {
     navigation.setOptions({
       header: () => (
         <CustomTextInput
@@ -70,7 +69,7 @@ export default function Index() {
       ),
     });
   }, [navigation, onPressSearch, onPressClear, searchQuery]);
-
+ */
   return (
     <SafeAreaView>
       <ListItem isLoading={loading} moviesResults={moviesResults} onEndReached={onEndReached} />

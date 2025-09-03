@@ -1,10 +1,8 @@
-import "react-native-gesture-handler";
-
 import { ActionSheetProvider } from "@expo/react-native-action-sheet";
 import { DarkTheme, DefaultTheme, ThemeProvider } from "@react-navigation/native";
 import { useFonts } from "expo-font";
-import { Stack } from "expo-router";
-import * as SplashScreen from "expo-splash-screen";
+import { SplashScreen, Stack } from "expo-router";
+//import * as SplashScreen from "expo-splash-screen";
 
 import { FavoriteProvider } from "@/contexts/favorite.context";
 import { useColorScheme } from "@/hooks/useColorScheme";

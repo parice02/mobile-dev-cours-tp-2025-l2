@@ -29,19 +29,21 @@ export interface SafeAreaViewProps extends Omit<SafeAreaBaseProps, "edges" | "st
 const SafeAreaView = memo(
   forwardRef<typeof SafeAreaBase, SafeAreaViewProps>((props, ref) => {
     const {
-      edges = ["top", "right", "bottom", "left"],
+      edges = ["right", "left"],
       style,
-      backgroundColor = "#fff",
+      backgroundColor = "red",
       systemBarStyle = "auto",
       systemBarHidden = false,
       children,
       ...rest
     } = props;
 
-    const containerStyle = useMemo(
-      () => [{ flex: 1, backgroundColor }, style],
-      [backgroundColor, style],
-    );
+    const defaultStyle = useMemo(() => ({ flex: 1, backgroundColor }), [backgroundColor]);
+
+    const containerStyle = useMemo(() => {
+      if (style) return [defaultStyle, style];
+      else return defaultStyle;
+    }, [style, defaultStyle]);
 
     return (
       <SafeAreaBase edges={edges} style={containerStyle} {...rest}>
