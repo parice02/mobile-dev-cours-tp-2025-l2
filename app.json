@@ -7,6 +7,7 @@
     "icon": "./assets/images/icon.png",
     "scheme": "tmdb-movies-app",
     "userInterfaceStyle": "automatic",
+    "githubUrl": "https://github.com/parice02/mobile-dev-cours-tp-2025-l2",
     "newArchEnabled": true,
     "ios": {
       "supportsTablet": true,
@@ -18,7 +19,8 @@
         "backgroundColor": "#ffffff"
       },
       "edgeToEdgeEnabled": true,
-      "package": "com.parice02.tmdbmoviesapp"
+      "package": "com.parice02.tmdbmoviesapp",
+      "versionCode": 1
     },
     "web": {
       "bundler": "metro",
