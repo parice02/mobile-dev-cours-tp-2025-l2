@@ -18,7 +18,7 @@ cd android && ./gradlew clean
 git clean --force && git reset --hard
 
 # expo
-npx expo run:android
+npx expo run:android --variant release -d
 NODE_ENV=development npx expo run:android --variant release
 npx expo-doctor
 npx expo prebuild --clean

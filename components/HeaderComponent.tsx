@@ -1,18 +1,11 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 
 const styles = StyleSheet.create({
   headerContainer: {
     padding: 10,
   },
-  headerText: {
-    fontSize: 18,
-  },
 });
 
-const HeaderComponent = () => (
-  <View style={styles.headerContainer}>
-    <Text style={styles.headerText}>Liste des films</Text>
-  </View>
-);
+const HeaderComponent = () => <View style={styles.headerContainer} />;
 
 export default HeaderComponent;

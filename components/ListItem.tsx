@@ -5,6 +5,7 @@ import { memo, useCallback } from "react";
 import { Pressable, View, VirtualizedList } from "react-native";
 
 import EmptyComponent from "@/components/EmptyComponent";
+import HeaderComponent from "@/components/HeaderComponent";
 import Item from "@/components/Item";
 import ItemSeparator from "@/components/ItemSeparator";
 import { Movie } from "@/types/types";
@@ -125,6 +126,7 @@ function ListItem({
         getItem={getItem}
         getItemCount={getItemCount}
         keyExtractor={keyExtractor}
+        ListHeaderComponent={<HeaderComponent />}
         ItemSeparatorComponent={itemSeparator}
         ListEmptyComponent={<EmptyComponent />}
         refreshing={isLoading}

@@ -39,7 +39,7 @@
     "react-native-animatable": "^1.4.0",
     "react-native-edge-to-edge": "1.6.0",
     "react-native-gesture-handler": "~2.24.0",
-    "react-native-mmkv": "^3.3.0",
+    "react-native-mmkv": "^4.0.0-beta.8",
     "react-native-nitro-modules": "^0.29.2",
     "react-native-reanimated": "~3.17.4",
     "react-native-safe-area-context": "5.4.0",
@@ -48,6 +48,7 @@
     "react-native-webview": "13.13.5"
   },
   "devDependencies": {
+    "@react-native-community/cli": "latest",
     "@babel/core": "^7.25.2",
     "@types/react": "~19.0.10",
     "eslint": "^9.25.0",
